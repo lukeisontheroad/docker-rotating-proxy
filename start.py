@@ -65,8 +65,7 @@ def preprocess_proxy(proxy):
     dict
         constaining keys ipaddress and port for the proxy
     """
-    proxy = proxy.split(':')
-    return {'ipaddress': proxy[0], 'port': proxy[1]}
+    return proxy
 
 
 def preprocess_proxy_list():
