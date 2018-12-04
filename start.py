@@ -97,6 +97,7 @@ def read_proxy_config(file_name):
     """
     with open(file_name) as data_file:
         data = data_file.readlines()
+    print(data)
     return data
 
 
