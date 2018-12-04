@@ -9,7 +9,7 @@ from subprocess import Popen
 
 HA_CONFIG_TMPL_PATH = 'haproxy.cfg.tmpl'
 HA_CONFIG_PATH = '/etc/haproxy/haproxy.cfg'
-PROXY_PATH = 'proxies.txt'
+PROXY_PATH = 'proxies.json'
 NUM_PROXIES = int(os.environ.get('NUM_PROXIES', 5))
 
 
@@ -65,7 +65,7 @@ def preprocess_proxy(proxy):
     dict
         constaining keys ipaddress and port for the proxy
     """
-    return proxy
+    return {'ipaddress': proxy['IPAddress'], 'port': proxy['Port']}
 
 
 def preprocess_proxy_list():
@@ -82,21 +82,20 @@ def preprocess_proxy_list():
 
 
 def read_proxy_config(file_name):
-    """ip:port list
+    """convert proxy file from json file to python data structure
 
     Parameters
     --------------
     file_name : str
-        location of proxies text file
+        location of proxies json list file
 
     Returns
     -------------
     object
-        proxy
+        datastructure representation of json file
     """
     with open(file_name) as data_file:
-        data = data_file.readlines()
-    print(data)
+        data = json.load(data_file)
     return data
 
 
@@ -138,7 +137,7 @@ backends = preprocess_proxy_list()
 active_backends = prepare_requested_proxies(
     backends=backends, num_proxies=NUM_PROXIES
 )
-print(active_backends)
+
 ha_config = create_proxy_config(active_backends)
 write_ha_proxy_config(ha_config)
 
