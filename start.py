@@ -138,7 +138,7 @@ backends = preprocess_proxy_list()
 active_backends = prepare_requested_proxies(
     backends=backends, num_proxies=NUM_PROXIES
 )
-
+print(active_backends)
 ha_config = create_proxy_config(active_backends)
 write_ha_proxy_config(ha_config)
 
