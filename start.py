@@ -10,7 +10,7 @@ from subprocess import Popen
 HA_CONFIG_TMPL_PATH = 'haproxy.cfg.tmpl'
 HA_CONFIG_PATH = '/etc/haproxy/haproxy.cfg'
 PROXY_PATH = 'proxies.json'
-NUM_PROXIES = int(os.environ.get('NUM_PROXIES', 5))
+NUM_PROXIES = int(os.environ.get('NUM_PROXIES', 6770))
 
 
 def render(tpl_path, context):
