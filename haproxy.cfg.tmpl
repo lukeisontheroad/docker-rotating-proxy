@@ -41,5 +41,5 @@ backend proxy_backend
     option httpchk HEAD https://www.sde.co.ke/ HTTP/1.1\r\nHost:\ www.sde.co.ke
     # http-check expect status 200
     {% for backend in backends -%}
-    server proxy{{ loop.index }}  {{ backend }} check fall 2 rise 2 inter 5s fastinter 1s downinter 5s
+    server proxy{{ loop.index }}  {{ backend.ipaddress }}:{{ backend.port }} check fall 2 rise 2 inter 5s fastinter 1s downinter 5s
     {% endfor %}
