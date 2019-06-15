@@ -12,6 +12,9 @@ HA_CONFIG_PATH = '/etc/haproxy/haproxy.cfg'
 PROXY_PATH = 'proxies.json'
 NUM_PROXIES = int(os.environ.get('NUM_PROXIES', 6770))
 
+f = open(".htpasswd", "a")
+f.write(os.environ.get('HTPASSWD', 6770))
+f.close()
 
 def render(tpl_path, context):
     """render haconfig from template
